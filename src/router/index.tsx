@@ -2,7 +2,7 @@
  * @Author:
  * @Date: 2025-02-13 15:49:17
  * @LastEditors: Do not edit
- * @LastEditTime: 2025-02-13 17:50:57
+ * @LastEditTime: 2025-02-13 17:55:01
  * @Description:
  * @FilePath: \react-project\src\router\index.tsx
  */
@@ -92,7 +92,6 @@ const normalizeRoutes = (routes: CustomRoute[]): RouteObject[] => {
 }
 
 const normalizedRoutes = normalizeRoutes(routes)
-console.log(normalizedRoutes,'8888')
 
-export { normalizedRoutes as routes }
+export default normalizedRoutes
 
