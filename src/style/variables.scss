@@ -1,0 +1,28 @@
+// 导航栏高度
+$nav-height: 20px;
+// 内容区内边距
+$content-padding: 10px;
+
+$red:red;
+
+// 主题颜色
+$primary-color: #1890ff;
+$success-color: #52c41a;
+$warning-color: #faad14;
+$error-color: #f5222d;
+
+// 文字颜色
+$text-primary: rgba(0, 0, 0, 0.85);
+$text-secondary: rgba(0, 0, 0, 0.65);
+$text-disabled: rgba(0, 0, 0, 0.25);
+
+// 边框和阴影
+$border-color: #d9d9d9;
+$box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+// 断点
+$screen-xs: 480px;
+$screen-sm: 576px;
+$screen-md: 768px;
+$screen-lg: 992px;
+$screen-xl: 1200px;
