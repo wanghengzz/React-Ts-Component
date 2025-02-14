@@ -7,8 +7,13 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "./src/style/variables.scss";`
+        additionalData: `@use "@/style/variables" as *;`
       }
     }
-  }
+  },
+  resolve: {
+    alias: {
+      '@': '/src'
+    }
+  },
 })

@@ -2,12 +2,13 @@
  * @Author:
  * @Date: 2025-02-13 15:49:17
  * @LastEditors: Do not edit
- * @LastEditTime: 2025-02-13 17:55:01
+ * @LastEditTime: 2025-02-14 09:34:04
  * @Description:
  * @FilePath: \react-project\src\router\index.tsx
  */
 import React, { lazy, Suspense } from 'react'
 import type { RouteObject } from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
 import Layout from '../Layout/index'
 
 interface MetaConfig {
@@ -92,6 +93,6 @@ const normalizeRoutes = (routes: CustomRoute[]): RouteObject[] => {
 }
 
 const normalizedRoutes = normalizeRoutes(routes)
-
-export default normalizedRoutes
+const router = createBrowserRouter(normalizedRoutes)
+export default router
 
