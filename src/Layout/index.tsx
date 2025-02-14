@@ -2,14 +2,13 @@
  * @Author: 
  * @Date: 2025-02-13 09:45:57
  * @LastEditors: Do not edit
- * @LastEditTime: 2025-02-14 15:46:41
+ * @LastEditTime: 2025-02-14 16:29:48
  * @Description: 
  * @FilePath: \react-project\src\Layout\index.tsx
  */
 // import { ButtonProps } from '../components/commonButton/interface';
 import { Outlet } from 'react-router-dom';
-import { Switch } from 'antd';
-import { useState, useEffect } from 'react';
+import ThemeSwitch from '../components/themeSwitch';
 export default function Layout() {
 
   // const btnList: ButtonProps[] = [
@@ -57,27 +56,9 @@ export default function Layout() {
   //   },
   // ]
 
-  const [theme, setTheme] = useState('dark');
-  
-  const changeTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme);
-  }
-
-  // 组件加载时设置初始主题
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, []);
-
   return <div className='layout'>
     <div className='layout-header'>
-      <Switch 
-        checkedChildren="亮" 
-        unCheckedChildren="暗" 
-        onChange={changeTheme} 
-        defaultChecked={theme === 'light'} 
-      />
+        <ThemeSwitch defaultTheme='light'></ThemeSwitch>
     </div>
     <div>
       <Outlet />
