@@ -2,15 +2,14 @@
  * @Author: 
  * @Date: 2025-02-13 09:45:57
  * @LastEditors: Do not edit
- * @LastEditTime: 2025-02-14 10:15:24
+ * @LastEditTime: 2025-02-14 15:46:41
  * @Description: 
  * @FilePath: \react-project\src\Layout\index.tsx
  */
 // import { ButtonProps } from '../components/commonButton/interface';
 import { Outlet } from 'react-router-dom';
-import './layout.scss';
 import { Switch } from 'antd';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 export default function Layout() {
 
   // const btnList: ButtonProps[] = [
@@ -58,14 +57,27 @@ export default function Layout() {
   //   },
   // ]
 
-  const [theme, setTheme] = useState(true);
+  const [theme, setTheme] = useState('dark');
+  
   const changeTheme = () => {
-    setTheme(!theme);
-    document.documentElement.setAttribute('data-theme', theme ? 'light' : 'dark');
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
   }
+
+  // 组件加载时设置初始主题
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, []);
+
   return <div className='layout'>
     <div className='layout-header'>
-      <Switch checkedChildren="亮" unCheckedChildren="暗" onChange={changeTheme} />
+      <Switch 
+        checkedChildren="亮" 
+        unCheckedChildren="暗" 
+        onChange={changeTheme} 
+        defaultChecked={theme === 'light'} 
+      />
     </div>
     <div>
       <Outlet />
