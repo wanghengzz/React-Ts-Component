@@ -2,7 +2,7 @@
  * @Author:
  * @Date: 2025-02-13 15:49:17
  * @LastEditors: Do not edit
- * @LastEditTime: 2025-02-14 09:34:04
+ * @LastEditTime: 2025-02-17 09:54:45
  * @Description:
  * @FilePath: \react-project\src\router\index.tsx
  */
@@ -85,14 +85,8 @@ const routes: CustomRoute[] = [
   },
 ]
 
-const normalizeRoutes = (routes: CustomRoute[]): RouteObject[] => {
-  return routes.map(({ meta, index, ...route }) => ({
-    ...route,
-    children: route.children ? normalizeRoutes(route.children) : []
-  }))
-}
+const router = createBrowserRouter(routes)
+console.log(router)
 
-const normalizedRoutes = normalizeRoutes(routes)
-const router = createBrowserRouter(normalizedRoutes)
 export default router
 

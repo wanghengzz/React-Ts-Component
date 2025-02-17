@@ -48,9 +48,12 @@ html {
     }
   }
   .layout-header {
-    padding: $content-padding;
-    height: calc($layout-header-height - $content-padding*2);
-    width: calc(100% - $content-padding * 2);
+    height: calc($layout-header-height - $content-padding);
+    width: 100%;
     background-color: var(--background-theme-light);
+    display: flex;
+    align-items: center;
   }
 }
+
+

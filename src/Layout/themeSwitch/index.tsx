@@ -2,7 +2,7 @@
  * @Author: 
  * @Date: 2025-02-14 16:23:28
  * @LastEditors: Do not edit
- * @LastEditTime: 2025-02-14 16:27:40
+ * @LastEditTime: 2025-02-17 09:15:44
  * @Description: 
  * @FilePath: \react-project\src\components\themeSwitch\index.tsx
  */
@@ -13,7 +13,7 @@ interface ThemeSwitchProps {
   defaultTheme: 'light' | 'dark';
 }
 
-const ThemeSwitch: React.FC<ThemeSwitchProps> = ({ defaultTheme }) => {
+const ThemeSwitch: React.FC<ThemeSwitchProps> = ({ defaultTheme='light' }) => {
   const [theme, setTheme] = useState(defaultTheme)
 
   const changeTheme = () => {
