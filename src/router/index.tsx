@@ -2,7 +2,7 @@
  * @Author:
  * @Date: 2025-02-13 15:49:17
  * @LastEditors: Do not edit
- * @LastEditTime: 2025-02-17 09:54:45
+ * @LastEditTime: 2025-02-17 14:18:49
  * @Description:
  * @FilePath: \react-project\src\router\index.tsx
  */
@@ -10,10 +10,11 @@ import React, { lazy, Suspense } from 'react'
 import type { RouteObject } from 'react-router-dom'
 import { createBrowserRouter } from 'react-router-dom'
 import Layout from '../Layout/index'
-
+import { HomeOutlined, InfoCircleOutlined } from '@ant-design/icons'
 interface MetaConfig {
   title: string
   requiresAuth: boolean
+  icon?: React.ReactNode
 }
 
 type CustomRoute = Omit<RouteObject, 'children' | 'index'> & {
@@ -29,7 +30,7 @@ const ProductDetail = lazy(() => import('../pages/ProductDetail/index'))
 const NotFound = lazy(() => import('../pages/NotFound/index'))
 
 const withSuspense = (Component: React.LazyExoticComponent<any>) => (
-  <Suspense fallback={<div>Loading...</div>}>
+  <Suspense fallback={<div className="loading-page">Loading...</div>}>
     <Component />
   </Suspense>
 )
@@ -45,6 +46,7 @@ const routes: CustomRoute[] = [
         meta: {
           title: '首页',
           requiresAuth: false,
+          icon: <HomeOutlined />,
         },
       },
       {
@@ -53,6 +55,7 @@ const routes: CustomRoute[] = [
         meta: {
           title: '关于',
           requiresAuth: false,
+          icon: <InfoCircleOutlined />,
         },
       },
       {
@@ -61,6 +64,7 @@ const routes: CustomRoute[] = [
         meta: {
           title: '产品列表',
           requiresAuth: true,
+          icon: <InfoCircleOutlined />,
         },
         children: [
           {

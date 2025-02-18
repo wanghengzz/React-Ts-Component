@@ -48,7 +48,7 @@ html {
     }
   }
   .layout-header {
-    height: calc($layout-header-height - $content-padding);
+    height: $layout-header-height;
     width: 100%;
     background-color: var(--background-theme-light);
     display: flex;
@@ -56,4 +56,11 @@ html {
   }
 }
 
+.loading-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
