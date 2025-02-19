@@ -25,7 +25,7 @@ export default function TopMenu() {
   return (
     <Menu
       mode="horizontal"
-      style={{ width: '100%' }}
+      style={{ width: '100%', height: '100%' }}
       items={menuItems}
       onClick={handleMenuClick}
       selectedKeys={[location.pathname]}

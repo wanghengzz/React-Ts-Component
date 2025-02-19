@@ -1,37 +1,27 @@
 /*
- * @Author: 
+ * @Author:
  * @Date: 2025-02-14 16:23:28
  * @LastEditors: Do not edit
- * @LastEditTime: 2025-02-17 09:15:44
- * @Description: 
- * @FilePath: \react-project\src\components\themeSwitch\index.tsx
+ * @LastEditTime: 2025-02-19 15:33:44
+ * @Description:
+ * @FilePath: \react-project\src\Layout\themeSwitch\index.tsx
  */
 import { Switch } from 'antd'
-import { useState, useEffect } from 'react'
-
-interface ThemeSwitchProps {
-  defaultTheme: 'light' | 'dark';
+import { useSelector } from 'react-redux'
+import { useConfig } from '../../hooks/config'
+const ThemeSwitch: React.FC = () => {
+let themeType = useSelector((state: any) => state.config.themeType)
+const { setTheme } = useConfig()
+const changeTheme = () => {
+  const newTheme = themeType === 'light' ? 'dark' : 'light'
+  setTheme(newTheme)
 }
-
-const ThemeSwitch: React.FC<ThemeSwitchProps> = ({ defaultTheme='light' }) => {
-  const [theme, setTheme] = useState(defaultTheme)
-
-  const changeTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark'
-    setTheme(newTheme)
-    document.documentElement.setAttribute('data-theme', newTheme)
-  }
-
-  // 组件加载时设置初始主题
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme)
-  }, [])
   return (
     <Switch
       checkedChildren="亮"
       unCheckedChildren="暗"
       onChange={changeTheme}
-      defaultChecked={theme === defaultTheme}
+      defaultChecked={themeType === 'light'}
     />
   )
 }

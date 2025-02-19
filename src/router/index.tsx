@@ -1,4 +1,12 @@
 /*
+ * @Author: 
+ * @Date: 2025-02-13 17:30:08
+ * @LastEditors: Do not edit
+ * @LastEditTime: 2025-02-19 10:04:11
+ * @Description: 
+ * @FilePath: \react-project\src\router\index.tsx
+ */
+/*
  * @Author:
  * @Date: 2025-02-13 15:49:17
  * @LastEditors: Do not edit
@@ -11,6 +19,7 @@ import type { RouteObject } from 'react-router-dom'
 import { createBrowserRouter } from 'react-router-dom'
 import Layout from '../Layout/index'
 import { HomeOutlined, InfoCircleOutlined } from '@ant-design/icons'
+import { Navigate } from 'react-router-dom'
 interface MetaConfig {
   title: string
   requiresAuth: boolean
@@ -28,12 +37,23 @@ const About = lazy(() => import('../pages/About/index'))
 const Products = lazy(() => import('../pages/Products/index'))
 const ProductDetail = lazy(() => import('../pages/ProductDetail/index'))
 const NotFound = lazy(() => import('../pages/NotFound/index'))
-
-const withSuspense = (Component: React.LazyExoticComponent<any>) => (
-  <Suspense fallback={<div className="loading-page">Loading...</div>}>
-    <Component />
-  </Suspense>
-)
+const Login = lazy(() => import('../pages/Login/index'))
+const AuthGuard = ({ children }: { children: React.ReactNode }) => {
+  const token = localStorage.getItem('token')
+  if (!token) {
+    return <Navigate to="/login" replace />
+  }
+  return <>{children}</>
+}
+const withAuth = (Component: React.LazyExoticComponent<any>) => {
+  return (
+    <Suspense fallback={<div className="loading-page">Loading...</div>}>
+      <AuthGuard>
+        <Component />
+      </AuthGuard>
+    </Suspense>
+  )
+}
 
 const routes: CustomRoute[] = [
   {
@@ -42,7 +62,7 @@ const routes: CustomRoute[] = [
     children: [
       {
         path: '/',
-        element: withSuspense(Home),
+        element: withAuth(Home),
         meta: {
           title: '首页',
           requiresAuth: false,
@@ -51,7 +71,7 @@ const routes: CustomRoute[] = [
       },
       {
         path: '/about',
-        element: withSuspense(About),
+        element: withAuth(About),
         meta: {
           title: '关于',
           requiresAuth: false,
@@ -60,7 +80,7 @@ const routes: CustomRoute[] = [
       },
       {
         path: '/products',
-        element: withSuspense(Products),
+        element: withAuth(Products),
         meta: {
           title: '产品列表',
           requiresAuth: true,
@@ -69,7 +89,7 @@ const routes: CustomRoute[] = [
         children: [
           {
             path: '/products/productDetail',
-            element: withSuspense(ProductDetail),
+            element: withAuth(ProductDetail),
             meta: {
               title: '产品详情',
               requiresAuth: true,
@@ -81,12 +101,16 @@ const routes: CustomRoute[] = [
   },
   {
     path: '*',
-    element: withSuspense(NotFound),
+    element: withAuth(NotFound),
     meta: {
       title: '404',
       requiresAuth: false,
     },
   },
+  {
+    path:'/login',
+    element:<Login/>
+  }
 ]
 
 const router = createBrowserRouter(routes)
