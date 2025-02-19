@@ -2,7 +2,7 @@
  * @Author:
  * @Date: 2025-02-19 09:59:05
  * @LastEditors: Do not edit
- * @LastEditTime: 2025-02-19 16:58:47
+ * @LastEditTime: 2025-02-19 17:24:56
  * @Description:
  * @FilePath: \react-project\src\pages\Login\index.tsx
  */
@@ -63,10 +63,15 @@ const Login: React.FC = () => {
 
   return (
     <div className="login-container">
+      <div className="stars">
+        {[...Array(50)].map((_, index) => (
+          <span key={index}></span>
+        ))}
+      </div>
       <Form
         name="login-form"
-        labelCol={{ span: 4 }}
-        wrapperCol={{ span: 20 }}
+        labelCol={{ span: 6 }}
+        wrapperCol={{ span: 18 }}
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
@@ -96,8 +101,8 @@ const Login: React.FC = () => {
           <Checkbox>记住我</Checkbox>
         </Form.Item>
 
-        <Form.Item label={null} wrapperCol={{ span: 24, offset: 12 }}>
-          <Space size="large">
+        <Form.Item label={null} wrapperCol={{ span: 24, offset: 0 }}>
+          <Space size="large" style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
             <Button type="primary" htmlType="submit">
               登录
             </Button>
