@@ -2,7 +2,7 @@
  * @Author: 
  * @Date: 2025-02-13 17:30:08
  * @LastEditors: Do not edit
- * @LastEditTime: 2025-02-19 10:04:11
+ * @LastEditTime: 2025-02-19 16:58:04
  * @Description: 
  * @FilePath: \react-project\src\router\index.tsx
  */
@@ -20,6 +20,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import Layout from '../Layout/index'
 import { HomeOutlined, InfoCircleOutlined } from '@ant-design/icons'
 import { Navigate } from 'react-router-dom'
+import { getLocalStorage } from '../utils/localStorage'
 interface MetaConfig {
   title: string
   requiresAuth: boolean
@@ -39,7 +40,7 @@ const ProductDetail = lazy(() => import('../pages/ProductDetail/index'))
 const NotFound = lazy(() => import('../pages/NotFound/index'))
 const Login = lazy(() => import('../pages/Login/index'))
 const AuthGuard = ({ children }: { children: React.ReactNode }) => {
-  const token = localStorage.getItem('token')
+  const token = getLocalStorage('token')
   if (!token) {
     return <Navigate to="/login" replace />
   }

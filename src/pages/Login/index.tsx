@@ -2,19 +2,19 @@
  * @Author:
  * @Date: 2025-02-19 09:59:05
  * @LastEditors: Do not edit
- * @LastEditTime: 2025-02-19 14:45:39
+ * @LastEditTime: 2025-02-19 16:58:47
  * @Description:
  * @FilePath: \react-project\src\pages\Login\index.tsx
  */
 import React from 'react'
 import type { FormProps } from 'antd'
-import { Button, Checkbox, Form, Input, Space } from 'antd'
+import { Button, Checkbox, Form, Input, Space, message } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import FullScreenLoading from '../../components/fullScreenLoading/index'
 import './login.scss'
 import { useConfig } from '../../hooks/config'
 import * as api from '../../mock/login'
 import * as enumeApi from '../../mock/enume'
+import { setLocalStorage } from '../../utils/localStorage'
 type FieldType = {
   username?: string
   password?: string
@@ -23,7 +23,7 @@ type FieldType = {
 
 const Login: React.FC = () => {
   const navigate = useNavigate()
-  const { setLoading, setEnume } = useConfig()
+  const { setLoading, setEnume, setUserInfo } = useConfig()
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (
     values: FieldType
@@ -32,13 +32,20 @@ const Login: React.FC = () => {
     
     try {
       setLoading(true)
-      const res = await api.login()
+      const res = await api.login({
+        username: values.username!,
+        password: values.password,
+        remember: values.remember,
+      })
 
       const enumeRes = await enumeApi.getEnume()
       setEnume(enumeRes.data||{})
 
       if (res.code === 10001) {
-        localStorage.setItem('token', res.data.token)
+        message.success('登录成功!')
+        setLocalStorage('token', res.data.token)
+        setLocalStorage('userInfo', JSON.stringify(res.data.userInfo))  
+        setUserInfo(res.data.userInfo)
         navigate('/')
       }
     } catch (error) {
@@ -56,11 +63,6 @@ const Login: React.FC = () => {
 
   return (
     <div className="login-container">
-      <FullScreenLoading
-        size="large"
-        className="fullscreen-spin"
-      ></FullScreenLoading>
-
       <Form
         name="login-form"
         labelCol={{ span: 4 }}

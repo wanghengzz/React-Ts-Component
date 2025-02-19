@@ -2,14 +2,15 @@
  * @Author: 
  * @Date: 2025-02-19 13:46:19
  * @LastEditors: Do not edit
- * @LastEditTime: 2025-02-19 15:11:10
+ * @LastEditTime: 2025-02-19 16:43:20
  * @Description: 
  * @FilePath: \react-project\src\hooks\config.ts
  */
 import { useDispatch } from 'react-redux'
-import { configSetLoading } from '../store/module/config'
+import { configSetLoading, configSetTheme } from '../store/module/config'
 import { enumeSet } from '../store/module/enume'
-import { configSetTheme } from '../store/module/config'
+import { userInfoSet } from '../store/module/userInfo'
+
 export const useConfig = () => {
   const dispatch = useDispatch()
   
@@ -25,9 +26,14 @@ export const useConfig = () => {
     dispatch(configSetTheme(theme))
   }
 
+  const setUserInfo = (userInfo: any) => {
+    dispatch(userInfoSet(userInfo))
+  }
+
   return {
     setLoading,
     setEnume,
     setTheme,
+    setUserInfo,
   }
 }
