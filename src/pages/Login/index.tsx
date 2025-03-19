@@ -2,7 +2,7 @@
  * @Author:
  * @Date: 2025-02-19 09:59:05
  * @LastEditors: Do not edit
- * @LastEditTime: 2025-02-19 17:24:56
+ * @LastEditTime: 2025-03-19 14:01:28
  * @Description:
  * @FilePath: \react-project\src\pages\Login\index.tsx
  */
@@ -70,8 +70,8 @@ const Login: React.FC = () => {
       </div>
       <Form
         name="login-form"
-        labelCol={{ span: 6 }}
-        wrapperCol={{ span: 18 }}
+        labelCol={{ span: 4 }}
+        wrapperCol={{ span: 20 }}
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}

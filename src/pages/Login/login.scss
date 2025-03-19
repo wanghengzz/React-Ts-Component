@@ -1,3 +1,5 @@
+@use "sass:math";
+
 .login-container{
   width: 100%;
   height: 100%;
@@ -71,13 +73,13 @@
 
       @for $i from 1 through 50 {
         &:nth-child(#{$i}) {
-          --size: #{random(3)}px;
+          --size: #{math.div(math.random() * 3, 1)}px;
           width: var(--size);
           height: var(--size);
-          left: #{random(100)}vw;
-          top: #{random(100)}vh;
-          --duration: #{random(3) + 2}s;
-          animation-delay: #{random(5)}s;
+          left: #{math.div(math.random() * 100, 1)}vw;
+          top: #{math.div(math.random() * 100, 1)}vh;
+          --duration: #{math.div(math.random() * 3, 1) + 2}s;
+          animation-delay: #{math.div(math.random() * 5, 1)}s;
         }
       }
     }
